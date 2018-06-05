@@ -18,6 +18,8 @@ public class Inquiry {
         this.message = message;
     }
 
+    public Inquiry(){}
+
     public String getPassportId() {
         return passportId;
     }

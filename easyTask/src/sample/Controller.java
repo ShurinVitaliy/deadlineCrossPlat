@@ -79,6 +79,7 @@ public class Controller {
 
         adminButton.setOnAction(event -> {
             if(passportIDField.getText().trim().equals("admin")&&avtoMarkField.getText().trim().equals("admin")){
+                System.out.println("открыл!");
                 openNewScene("/sample/adminRoom.fxml");
             }
         });
@@ -106,7 +107,6 @@ public class Controller {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(window));
-
         try {
             loader.load();
         } catch (IOException e) {
@@ -115,6 +115,7 @@ public class Controller {
         Parent root = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
         stage.showAndWait();
 
     }

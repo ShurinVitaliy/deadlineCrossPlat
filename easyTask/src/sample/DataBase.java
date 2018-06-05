@@ -26,9 +26,9 @@ public class DataBase extends Configs{
             prst = getDbConnection().prepareStatement(insert);
             System.out.println(insert);
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         try {
@@ -42,7 +42,7 @@ public class DataBase extends Configs{
            // e.printStackTrace();
         }
     }
-
+/*
     public ResultSet getInquiry(Inquiry inquiry){
         ResultSet resultSet = null;
         String selcet =  "SELECT * FROM " + ConstInquiry.INQUIRTY_TABLE + " WHERE " +
@@ -62,5 +62,12 @@ public class DataBase extends Configs{
             e.printStackTrace();
         }
         return resultSet;
+    }
+    */
+    public Inquiry getInquiry(){
+        Inquiry inquiry = new Inquiry();
+        String select =  "SELECT * FROM " + ConstInquiry.INQUIRTY_TABLE;
+        System.out.println();
+        return inquiry;
     }
 }
