@@ -1,9 +1,6 @@
 package sample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by User on 05.06.2018.
@@ -35,21 +32,35 @@ public class DataBase extends Configs{
         }
 
         try {
-            System.out.println("lllllllllllllllllllll");
             prst.setString(1, inquiry.getPassportId());
-            System.out.println("222");
             prst.setString(2, inquiry.getAvtoMark());
-            System.out.println("333");
             prst.setString(3, inquiry.getPhoneNumber());
-            System.out.println("444");
             prst.setString(4, inquiry.getDate());
-            System.out.println("555");
             prst.setString(5, inquiry.getMessage());
-            System.out.println("666");
             prst.executeUpdate();
-            System.out.println("777");
         } catch (SQLException e) {
            // e.printStackTrace();
         }
+    }
+
+    public ResultSet getInquiry(Inquiry inquiry){
+        ResultSet resultSet = null;
+        String selcet =  "SELECT * FROM " + ConstInquiry.INQUIRTY_TABLE + " WHERE " +
+               ConstInquiry.INQUIRTY_PASSPORT_ID + "=? AND " + ConstInquiry.INQUIRTY_AVTO_MARK + "=? AND " + ConstInquiry.INQUIRTY_PHONE_NUMBER +
+                "=? AND " + ConstInquiry.INQUIRTY_DATE + "=? AND " + ConstInquiry.INQUIRTY_MESSAGE + "=?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selcet);
+            prSt.setString(1, inquiry.getPassportId());
+            prSt.setString(2, inquiry.getAvtoMark());
+            prSt.setString(3, inquiry.getPhoneNumber());
+            prSt.setString(4, inquiry.getDate());
+            prSt.setString(5, inquiry.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 }
