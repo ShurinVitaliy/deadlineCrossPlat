@@ -80,7 +80,7 @@ public class Controller {
         adminButton.setOnAction(event -> {
             if(passportIDField.getText().trim().equals("admin")&&avtoMarkField.getText().trim().equals("admin")){
                 System.out.println("открыл!");
-                openNewScene("/sample/adminRoom.fxml");
+                openNewScene("/sample/admin.fxml");
             }
         });
 
