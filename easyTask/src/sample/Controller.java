@@ -79,7 +79,6 @@ public class Controller {
 
         adminButton.setOnAction(event -> {
             if(passportIDField.getText().trim().equals("admin")&&avtoMarkField.getText().trim().equals("admin")){
-                System.out.println("открыл!");
                 openNewScene("/sample/admin.fxml");
             }
         });
@@ -89,6 +88,7 @@ public class Controller {
     private void sendInquiry(String passportID,String avtoMark,String phoneNumber,String message,String date) {
         Inquiry inquiry = new Inquiry(passportID, avtoMark, phoneNumber, date, message);
         DataBase dataBase = new DataBase();
+        System.out.println("1");
         dataBase.add_inquiry(inquiry);
     }
     private void messageBox(String message){

@@ -1,6 +1,7 @@
 package sample;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,14 +23,20 @@ public class Admin {
     private TextArea messageField;
 
     @FXML
-    private ListView<?> listRecuestQuery;
+    private ListView<String> listRecuestQuery;
 
     @FXML
     private Button adminButton;
 
     @FXML
     void initialize() {
-        
-
+        DataBase dataBase = new DataBase();
+        List<Inquiry> inquiries = dataBase.getInquiry();
+        for (Inquiry inquirie:inquiries) {
+            listRecuestQuery.getItems().addAll(inquirie.getPassportId());
+        }
+        sendButton.setOnAction(event -> {
+            System.out.println(index);
+        });
     }
 }

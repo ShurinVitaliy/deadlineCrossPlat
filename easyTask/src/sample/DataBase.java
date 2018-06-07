@@ -1,6 +1,8 @@
 package sample;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 05.06.2018.
@@ -9,11 +11,14 @@ public class DataBase extends Configs{
     public Connection dbConnection;
 
     public Connection getDbConnection() throws ClassNotFoundException, SQLException{
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName
-                + "?verifyServerCertificate=false" + "&useSSL=false" +
+        System.out.println("neeeeeeeeeeeeeeeeeet");
+        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?verifyServerCertificate=false" + "&useSSL=false" +
                 "&requireSSL=false" + "&useLegacyDatetimeCode=false" + "&amp" + "&serverTimezone=UTC";
+        System.out.println(connectionString);
         Class.forName("com.mysql.cj.jdbc.Driver");
+
         dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+        System.out.println("5");
         return dbConnection;
     }
 
@@ -23,8 +28,9 @@ public class DataBase extends Configs{
         PreparedStatement prst = null;
 
         try {
+            System.out.println("2");
             prst = getDbConnection().prepareStatement(insert);
-            System.out.println(insert);
+            System.out.println("3");
         } catch (SQLException e) {
             //e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -64,10 +70,38 @@ public class DataBase extends Configs{
         return resultSet;
     }
     */
-    public Inquiry getInquiry(){
-        Inquiry inquiry = new Inquiry();
+    public List<Inquiry> getInquiry(){
+        List <Inquiry> inquirys = new ArrayList<>();
+        ResultSet resultSet = null;
+        Statement statement = null;
         String select =  "SELECT * FROM " + ConstInquiry.INQUIRTY_TABLE;
-        System.out.println();
-        return inquiry;
+        try {
+            System.out.println("1_1");
+            try {
+                statement = getDbConnection().createStatement();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            System.out.println("1_2");
+            resultSet = statement.executeQuery(select);
+            System.out.println("1_3");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println("2");
+            while (resultSet.next()){
+                String passportId = resultSet.getString(2);
+                String avtoMark = resultSet.getString(3);
+                String phoneNumber = resultSet.getString(4);
+                String date = resultSet.getString(5);
+                String message = resultSet.getString(6);
+                Inquiry inquiry = new Inquiry(passportId, avtoMark, phoneNumber, date, message);
+                inquirys.add(inquiry);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return inquirys;
     }
 }

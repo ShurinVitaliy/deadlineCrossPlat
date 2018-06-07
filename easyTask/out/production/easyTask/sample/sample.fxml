@@ -30,7 +30,7 @@
                   <DatePicker fx:id="beforeDatePicker" layoutX="215.0" layoutY="133.0" prefHeight="25.0" prefWidth="234.0" promptText="before" />
                </children>
             </AnchorPane>
-            <Label layoutX="79.0" layoutY="12.0" text="Car Rental" textFill="#bf8e8e">
+            <Label layoutX="79.0" layoutY="12.0" text="car dealer" textFill="#bf8e8e">
                <font>
                   <Font name="Sitka Small Italic" size="50.0" />
                </font>
